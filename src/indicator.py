@@ -38,7 +38,7 @@ def oddsRatio(group1: np.ndarray, group2: np.ndarray) -> float:
         return group1, group2, np.inf
     return group1, group2, round(group1/group2,3)
 
-def profitFactor(returns) -> float:
+def profitFactor(returns: np.ndarray) -> float:
     returns = returns.astype(float)
     goss_profits = np.cumsum(returns[returns>0])
     goss_loss = abs(np.cumsum(returns[returns<0]))

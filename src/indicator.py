@@ -5,10 +5,10 @@ import warnings
 def RoI(cost: float, final_value: float) -> float:
     return round((final_value - cost) / cost,3)
 
-def winRate(profits: np.array) -> np.float:
-    profits = profits.astype(float)
-    win = np.count_nonzero(profits>0)
-    return round(win / len(profits),3)*100
+def winRate(returns: np.array) -> np.float:
+    returns = returns.astype(float)
+    win = np.count_nonzero(returns>0)
+    return round(win / len(returns),3)*100
 
 def MDD(value_history: np.ndarray) -> float:
     value_history = value_history.astype(float)
@@ -16,10 +16,10 @@ def MDD(value_history: np.ndarray) -> float:
     trough_value = np.min(value_history)
     return round((peak_value - rough_value) / peak_value, 3)
 
-def odds(profits: np.ndarray) -> float:
-    profits = profits.astype(float)
-    win = np.count_nonzero(profits>0)
-    loss = np.count_nonzero(profits<0)
+def odds(returns: np.ndarray) -> float:
+    returns = returns.astype(float)
+    win = np.count_nonzero(returns>0)
+    loss = np.count_nonzero(returns<0)
     if loss == 0.0:
         return np.inf
     return round(win/loss, 3)
@@ -38,19 +38,19 @@ def oddsRatio(group1: np.ndarray, group2: np.ndarray) -> float:
         return group1, group2, np.inf
     return group1, group2, round(group1/group2,3)
 
-def profitFactor(profits) -> float:
-    profits = profits.astype(float)
-    goss_profits = np.cumsum(profits[profits>0])
-    goss_loss = abs(np.cumsum(profits[profits<0]))
+def profitFactor(returns) -> float:
+    returns = returns.astype(float)
+    goss_profits = np.cumsum(returns[returns>0])
+    goss_loss = abs(np.cumsum(returns[returns<0]))
     if goss_loss == 0.0:
         goss_loss = 0
         warnings.warn("The number of loss trading is 0. The value of odds would be abnomal", UserWarning)
     return round(goss_profits/goss_loss,3)
 
-def sharpRatio(profits: np.ndarray) -> float:
-    profits = profits.astype(float)
-    profit_ev = profits.mean()
-    profit_std = profits.std()
+def sharpRatio(returns: np.ndarray) -> float:
+    returns = returns.astype(float)
+    profits_ev = returns.mean()
+    profits_std = returns.std()
     NO_RISK_RATE = 0.02
     if profit_std == 0.0:
         warnings.warn("The value of std is 0, return inf.", UserWarning)

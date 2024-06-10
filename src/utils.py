@@ -1,6 +1,7 @@
-import jso
+import json
 import pandas as pd
 import warnings
+import numpy as np
 
 def loadTrades(filename: str) -> pd.DataFrame:
     """
@@ -22,7 +23,7 @@ def loadTrades(filename: str) -> pd.DataFrame:
     return df
 
 
-def valueAfTrade(init_val: float, profits: np.ndarray) -> np.ndarray:
+def valueHistory(init_val: float, net_returns: np.ndarray) -> np.ndarray:
     """
     Calculate the account value after each trade.
     
@@ -37,7 +38,8 @@ def valueAfTrade(init_val: float, profits: np.ndarray) -> np.ndarray:
     value to the beginning of the profits array, then calculates the cumulative sum to obtain the
     account value after each trade.
     """
-    profits = np.append(init_val, profits, axis=0)
-    vals = np.cumsum(profits, axis=0)
+    
+    net_returns = np.append(np.array([init_val]), net_returns, axis=0)
+    vals = np.cumsum(net_returns, axis=0)
     return vals
 

@@ -20,7 +20,7 @@ ETH_trade_history = trade_history[trade_history['instId'].str.contains("ETH")]
 BTC_trade_history = trade_history[trade_history['instId'].str.contains("BTC")]
 
 # Calculate the indicator values
-roi = indicator.RoI(INI_VAL, value_history[-1])*100
+roi = indicator.RoI(INI_VAL, value_history[-1])
 win_rate = indicator.winRate(returns)
 mdd = indicator.MDD(value_history)
 BTC_odds, ETH_odds, odds_ratio = indicator.oddsRatio(BTC_trade_history['fillPnl'], ETH_trade_history['fillPnl'])

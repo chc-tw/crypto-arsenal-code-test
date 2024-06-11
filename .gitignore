@@ -5,7 +5,7 @@ personal-9894.md
 test.ipynb
 data.json
 
-
+__pycache__
 ~$*
 *~
 
@@ -18,3 +18,4 @@ ehthumbs.db
 Thumbs.db
 
 .sublime
+*.yaml

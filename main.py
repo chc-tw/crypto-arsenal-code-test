@@ -3,7 +3,6 @@ import pandas as pd
 import json
 import src.utils as utils
 import src.indicator as indicator
-import matplotlib.pyplot as plt
 from tabulate import tabulate
 
 # Load the history data
